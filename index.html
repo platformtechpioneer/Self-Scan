@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self Scan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- شاشة تسجيل الدخول -->
+    <div id="loginScreen" class="screen active">
+        <div class="login-container">
+            <div class="logo-container">
+                <img src="log.jpg" alt="شعار التطبيق" class="logo">
+                <div id="loginEmoji" class="login-emoji">😊</div>
+            </div>
+            <form id="loginForm">
+                <div class="input-group">
+                    <input type="email" id="loginEmail" placeholder="البريد الإلكتروني" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="loginPassword" placeholder="كلمة المرور" required>
+                </div>
+                <button type="submit" class="btn-primary">تسجيل الدخول</button>
+            </form>
+            <div class="login-links">
+                <a href="#" id="forgotPasswordLink" class="forgot-link">نسيت كلمة المرور؟</a>
+                <a href="#" id="showSignup" class="forgot-link">إنشاء حساب جديد</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- شاشة إنشاء حساب -->
+    <div id="signupScreen" class="screen">
+        <div class="login-container">
+            <h2>إنشاء حساب جديد</h2>
+            <div id="signupStep1">
+                <form id="signupForm1">
+                    <div class="input-group">
+                        <input type="text" id="signupName" placeholder="الاسم" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="signupUsername" placeholder="اسم المستخدم" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="signupEmail" placeholder="البريد الإلكتروني" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="signupPassword" placeholder="كلمة المرور" required>
+                    </div>
+                    <button type="submit" class="btn-primary">إرسال رمز التحقق</button>
+                </form>
+            </div>
+            <div id="signupStep2" style="display: none;">
+                <p>أدخل الرمز المرسل إلى بريدك الإلكتروني</p>
+                <div class="input-group">
+                    <input type="text" id="signupVerificationCode" placeholder="رمز التحقق" required>
+                </div>
+                <button id="verifySignupCode" class="btn-primary">تحقق من الرمز</button>
+            </div>
+            <div id="signupStep3" style="display: none;">
+                <p>تم التحقق بنجاح، انقر على إنشاء الحساب</p>
+                <button id="createAccountBtn" class="btn-primary">إنشاء الحساب</button>
+            </div>
+            <a href="#" id="backToLoginFromSignup" class="forgot-link">العودة لتسجيل الدخول</a>
+        </div>
+    </div>
+
+    <!-- شاشة استعادة كلمة المرور -->
+    <div id="forgotPasswordScreen" class="screen">
+        <div class="login-container">
+            <h2>استعادة كلمة المرور</h2>
+            <div id="forgotStep1">
+                <p>أدخل بريدك الإلكتروني لإرسال رمز التحقق</p>
+                <div class="input-group">
+                    <input type="email" id="forgotEmail" placeholder="البريد الإلكتروني" required>
+                </div>
+                <button id="sendCodeBtn" class="btn-primary">إرسال الرمز</button>
+            </div>
+            <div id="forgotStep2" style="display: none;">
+                <p>أدخل الرمز المرسل إلى بريدك الإلكتروني</p>
+                <div class="input-group">
+                    <input type="text" id="verificationCode" placeholder="رمز التحقق" required>
+                </div>
+                <button id="verifyCodeBtn" class="btn-primary">تحقق من الرمز</button>
+            </div>
+            <div id="forgotStep3" style="display: none;">
+                <p>أدخل كلمة المرور الجديدة</p>
+                <div class="input-group">
+                    <input type="password" id="newPassword" placeholder="كلمة المرور الجديدة" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required>
+                </div>
+                <button id="resetPasswordBtn" class="btn-primary">تغيير كلمة المرور</button>
+            </div>
+            <a href="#" id="backToLoginFromForgot" class="forgot-link">العودة لتسجيل الدخول</a>
+        </div>
+    </div>
+
+    <!-- التطبيق الرئيسي -->
+    <div id="appScreen" class="screen">
+        <!-- شريط التنقل العلوي -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <span class="logo-text">Self Scan</span>
+                    <span class="scan-animation"></span>
+                </h1>
+                <div class="settings-menu">
+                    <button id="settingsBtn" class="icon-btn">•••</button>
+                    <div id="settingsDropdown" class="dropdown-menu">
+                        <a href="#" id="accountLink">الحساب</a>
+                        <a href="#" id="settingsLink">الإعدادات</a>
+                        <a href="#" id="logoutLink">تسجيل الخروج</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- محتوى التبويبات -->
+        <main class="tab-content">
+            <!-- تبويب الرئيسية -->
+            <div id="homeTab" class="tab-pane active">
+                <div class="banner">
+                    <img src="bn.jpg" alt="بانر التطبيق">
+                </div>
+                <div class="images-grid">
+                    <img src="s1.jpg" alt="صورة 1">
+                    <img src="s2.jpg" alt="صورة 2">
+                    <img src="s3.jpg" alt="صورة 3">
+                    <img src="s4.jpg" alt="صورة 4">
+                </div>
+            </div>
+
+            <!-- تبويب الفروع -->
+            <div id="branchesTab" class="tab-pane">
+                <div class="branches-grid">
+                    <div class="branch-card" data-branch="فتح الله">
+                        <img src="f.jpg" alt="فتح الله">
+                        <h3>فتح الله</h3>
+                    </div>
+                    <div class="branch-card" data-branch="كارفور">
+                        <img src="k.jpg" alt="كارفور">
+                        <h3>كارفور</h3>
+                    </div>
+                    <div class="branch-card" data-branch="كازبون">
+                        <img src="k1.jpg" alt="كازبون">
+                        <h3>كازبون</h3>
+                    </div>
+                    <div class="branch-card" data-branch="مترو ماركت">
+                        <img src="m.jpg" alt="مترو ماركت">
+                        <h3>مترو ماركت</h3>
+                    </div>
+                    <div class="branch-card" data-branch="سعودي">
+                        <img src="s.jpg" alt="سعودي">
+                        <h3>سعودي</h3>
+                    </div>
+                    <div class="branch-card" data-branch="اولاد رجب">
+                        <img src="a.jpg" alt="اولاد رجب">
+                        <h3>اولاد رجب</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تبويب الدفع -->
+            <div id="paymentTab" class="tab-pane">
+                <div class="payment-container">
+                    <h2>الدفع الإلكتروني</h2>
+                    <div class="input-group">
+                        <input type="text" id="paymentCode" placeholder="أدخل كود الدفع">
+                    </div>
+                    <button id="payNowBtn" class="btn-primary">ادفع الآن</button>
+                    <div id="paymentResult" class="payment-result"></div>
+                </div>
+            </div>
+
+            <!-- تبويب المعاملات -->
+            <div id="transactionsTab" class="tab-pane">
+                <div class="transactions-container">
+                    <h2>المعاملات السابقة</h2>
+                    <div id="transactionsList" class="transactions-list">
+                        <!-- سيتم تعبئة المعاملات ديناميكياً -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- التبويبات الرئيسية -->
+        <nav class="tabs">
+            <button class="tab active" data-tab="home">
+                <span class="tab-icon">🏠</span>
+                <span class="tab-text">الرئيسية</span>
+            </button>
+            <button class="tab" data-tab="branches">
+                <span class="tab-icon">🏪</span>
+                <span class="tab-text">الفروع</span>
+            </button>
+            <button class="tab" data-tab="payment">
+                <span class="tab-icon">💳</span>
+                <span class="tab-text">الدفع</span>
+            </button>
+            <button class="tab" data-tab="transactions">
+                <span class="tab-icon">📋</span>
+                <span class="tab-text">المعاملات</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- شاشة الأقسام -->
+    <div id="departmentsScreen" class="screen">
+        <div class="screen-header">
+            <button id="backToBranches" class="back-btn">← العودة</button>
+            <h2 id="branchName"></h2>
+        </div>
+        <div class="departments-list">
+            <div class="department-card" data-department="المواد الغذائية الأساسية">
+                <h3>🥦 المواد الغذائية الأساسية</h3>
+            </div>
+            <div class="department-card" data-department="الألبان والأجبان">
+                <h3>🧀 الألبان والأجبان</h3>
+            </div>
+            <div class="department-card" data-department="اللحوم والدواجن والمجمدات">
+                <h3>🍗 اللحوم والدواجن والمجمدات</h3>
+            </div>
+            <div class="department-card" data-department="الأدوات المدرسية">
+                <h3>📚 الأدوات المدرسية</h3>
+            </div>
+            <div class="department-card" data-department="الأدوات المنزلية">
+                <h3>🏠 الأدوات المنزلية</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- شاشة المنتجات -->
+    <div id="productsScreen" class="screen">
+        <div class="screen-header">
+            <button id="backToDepartments" class="back-btn">← العودة</button>
+            <h2 id="departmentName"></h2>
+        </div>
+        <div id="productsList" class="products-list"></div>
+    </div>
+
+    <!-- شاشة الحساب -->
+    <div id="accountScreen" class="screen">
+        <div class="screen-header">
+            <button id="backToAppFromAccount" class="back-btn">← العودة</button>
+            <h2>الحساب</h2>
+        </div>
+        <div class="account-info">
+            <div class="info-item">
+                <label>الاسم:</label>
+                <span id="accountName">-</span>
+            </div>
+            <div class="info-item">
+                <label>اسم المستخدم:</label>
+                <span id="accountUsername">-</span>
+            </div>
+            <div class="info-item">
+                <label>البريد الإلكتروني:</label>
+                <span id="accountEmail">-</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- شاشة الإعدادات -->
+    <div id="settingsScreen" class="screen">
+        <div class="screen-header">
+            <button id="backToAppFromSettings" class="back-btn">← العودة</button>
+            <h2>الإعدادات</h2>
+        </div>
+        <div class="settings-list">
+            <div class="setting-item">
+                <label>الوضع الداكن</label>
+                <label class="switch">
+                    <input type="checkbox" id="darkModeToggle">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <label>اللغة</label>
+                <select id="languageSelect">
+                    <option value="ar">العربية</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- رسالة تأكيد الدفع -->
+    <div id="paymentSuccess" class="modal">
+        <div class="modal-content">
+            <div class="success-icon">✓</div>
+            <h2>تم الدفع بنجاح</h2>
+            <p>شكراً لك على استخدام تطبيقنا</p>
+            <button id="closePaymentSuccess" class="btn-primary">موافق</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
