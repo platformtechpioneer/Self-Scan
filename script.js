@@ -431,7 +431,7 @@ function showProducts(department) {
     }
 }
 
-// معالجة الدفع
+// معالجة الدفع - المعدلة
 function processPayment() {
     const paymentCode = document.getElementById('paymentCode').value;
     const paymentResult = document.getElementById('paymentResult');
@@ -441,21 +441,19 @@ function processPayment() {
         return;
     }
     
-    // اختيار 6 منتجات عشوائية
-    const allProducts = [];
-    Object.values(productsData).forEach(deptProducts => {
-        allProducts.push(...deptProducts);
-    });
+    // المنتجات الثابتة
+    const selectedProducts = [
+        { name: "كيلو تفاح", price: 40, unit: "الكيلو" },
+        { name: "كيلو موز", price: 30, unit: "الكيلو" },
+        { name: "خدمة", price: 1, unit: "الخدمة" }
+    ];
     
-    const selectedProducts = [];
     let total = 0;
     
-    for (let i = 0; i < 6; i++) {
-        const randomIndex = Math.floor(Math.random() * allProducts.length);
-        const product = allProducts[randomIndex];
-        selectedProducts.push(product);
+    // حساب الإجمالي
+    selectedProducts.forEach(product => {
         total += product.price;
-    }
+    });
     
     // حفظ المعاملة
     saveTransaction(selectedProducts, total);
@@ -463,7 +461,7 @@ function processPayment() {
     // عرض المنتجات المختارة والمجموع
     let productsHTML = '<h3>المنتجات المختارة:</h3><ul>';
     selectedProducts.forEach(product => {
-        productsHTML += `<li>${product.name} - ${product.price} جنيه</li>`;
+        productsHTML += `<li>${product.name} - ${product.price} جنيه ${product.unit ? '/' + product.unit : ''}</li>`;
     });
     productsHTML += `</ul><p><strong>الإجمالي: ${total} جنيه</strong></p>`;
     productsHTML += '<button id="completePayment" class="btn-primary">اكمل عملية الدفع</button>';
